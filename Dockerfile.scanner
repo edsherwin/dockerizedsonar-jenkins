@@ -2,8 +2,8 @@ FROM openjdk:17-jdk-alpine
 
 
 RUN apk add --no-cache curl grep sed unzip bash 
-# Install Node.js LTS version from Alpine repository
-RUN apk add --no-cache --repository=http://nl.alpinelinux.org/alpine/edge/community nodejs npm
+
+RUN apk add --update npm && apk add --update nodejs npm && node -v && npm -v
 
 
 # Set timezone to CST
