@@ -3,7 +3,7 @@ FROM openjdk:17-jdk-alpine
 
 RUN apk add --no-cache curl grep sed unzip bash 
 
-RUN apk add --update npm && apk add --update nodejs npm && node -v && npm -v
+RUN apk add --update npm && apk add --update npm nodejs-current  && node -v && npm -v
 
 
 # Set timezone to CST
