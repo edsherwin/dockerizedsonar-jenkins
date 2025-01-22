@@ -1,7 +1,8 @@
 FROM openjdk:17-jdk-alpine
 
 
-RUN apk add --no-cache curl grep sed unzip bash nodejs nodejs-npm
+RUN apk add --no-cache curl grep sed unzip bash nodejs
+
 
 # Set timezone to CST
 ENV TZ=America/Chicago
