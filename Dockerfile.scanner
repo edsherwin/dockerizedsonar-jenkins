@@ -1,6 +1,21 @@
-FROM openjdk:15-ea-jdk-alpine
+FROM openjdk:17-jdk-slim
 
-RUN apk add --no-cache curl grep sed unzip bash nodejs nodejs-npm
+# Update the package list and install necessary dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    grep \
+    sed \
+    unzip \
+    bash \
+    npm \
+    nodejs
+
+# Install the latest LTS Node.js version from NodeSource setup script
+RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash - && \
+    apt-get install -y nodejs
+
+# Verify Node.js version to ensure the LTS version is installed
+RUN node -v
 
 # Set timezone to CST
 ENV TZ=America/Chicago
@@ -8,7 +23,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 ARG SONAR_SCANNER_VERSION="4.0.0.1744"
 ENV SONAR_SCANNER_HOME=/usr/local/bin/sonar-scanner
-ENV PATH $PATH:$SONAR_SCANNER_HOME/bin
+ENV PATH=$PATH:$SONAR_SCANNER_HOME/bin
 
 WORKDIR /usr/src
 
@@ -21,7 +36,7 @@ RUN curl --insecure -o ./sonarscanner.zip -L https://binaries.sonarsource.com/Di
 ENV SONAR_RUNNER_HOME=/usr/lib/sonar-scanner
 
 COPY sonar-runner.properties /usr/lib/sonar-scanner/conf/sonar-scanner.properties
-
+RUN which node
 
 #   ensure Sonar uses the provided Java for musl instead of a borked glibc one
 RUN sed -i 's/use_embedded_jre=true/use_embedded_jre=false/g' /usr/lib/sonar-scanner/bin/sonar-scanner
