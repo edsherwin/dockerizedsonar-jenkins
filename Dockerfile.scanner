@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk-alpine
+FROM openjdk
 
 
 RUN apk add --no-cache curl grep sed unzip bash 
