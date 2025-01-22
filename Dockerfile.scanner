@@ -1,4 +1,5 @@
-FROM openjdk:15-ea-jdk-alpine
+FROM FROM openjdk:17-jdk-alpine
+
 
 RUN apk add --no-cache curl grep sed unzip bash nodejs nodejs-npm
 
