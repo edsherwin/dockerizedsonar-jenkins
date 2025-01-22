@@ -8,7 +8,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 ARG SONAR_SCANNER_VERSION="4.0.0.1744"
 ENV SONAR_SCANNER_HOME=/usr/local/bin/sonar-scanner
-ENV PATH $PATH:$SONAR_SCANNER_HOME/bin
+ENV PATH=$PATH:$SONAR_SCANNER_HOME/bin
 
 WORKDIR /usr/src
 
