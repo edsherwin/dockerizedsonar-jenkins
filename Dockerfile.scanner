@@ -1,12 +1,21 @@
-FROM openjdk
+FROM openjdk:17-jdk
 
+# Update the package list and install necessary dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    grep \
+    sed \
+    unzip \
+    bash \
+    npm \
+    nodejs
 
-# RUN apk add --no-cache curl grep sed unzip bash 
+# Install the latest LTS Node.js version from NodeSource setup script
+RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash - && \
+    apt-get install -y nodejs
 
-# RUN apk add --update npm && apk add --update npm nodejs-current  && node -v && npm -v
-RUN uname -a
-RUN yum install  curl grep sed unzip bash npm nodejs-current
-
+# Verify Node.js version to ensure the LTS version is installed
+RUN node -v
 
 # Set timezone to CST
 ENV TZ=America/Chicago
