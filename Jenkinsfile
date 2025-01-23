@@ -1,7 +1,7 @@
 node { 
  
     stage('Checkout') {
-        git branch: "master", url: "https://github.com/edsherwin/docker-sonar-jenkins.git", credentialsId: "edsherwin"
+        git branch: "master", url: " https://github.com/shubhamksawant/docker-sonar-jenkins.git"
     }
 
     stage('Build') {
